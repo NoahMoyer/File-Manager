@@ -13,6 +13,7 @@ namespace File_Manager.FileManagerScripts
         //Default directory
         DirectoryInfo dir = new DirectoryInfo(@"/storage/emulated/0/");
 
+
         //variable for directory name
         //List<String> directories = new List<string>;
 
@@ -29,6 +30,10 @@ namespace File_Manager.FileManagerScripts
             return dir.GetDirectories();
         }
 
+        public DirectoryInfo getCurrentDirectory()
+        {
+            return dir;
+        }
         public void updateDirectory(DirectoryInfo newDir)
         {
             dir = newDir;

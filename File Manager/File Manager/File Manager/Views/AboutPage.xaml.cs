@@ -12,19 +12,26 @@ namespace File_Manager.Views
 {
     public partial class AboutPage : ContentPage
     {
-        FileManager file = new FileManager();
+        FileManager fileManager = new FileManager();
         public AboutPage()
         {
             InitializeComponent();
-            directoryDisplay.Text = "/storage/emulated/0/";
+            
+            initializeDisplay();
 
+
+        }
+
+        public void initializeDisplay()
+        {
+            directoryDisplay.Text = fileManager.getCurrentDirectory().FullName; //get current directory
             //get files
-            FileInfo[] files = file.getFiles();
+            FileInfo[] files = fileManager.getFiles();
             //get directories
-            DirectoryInfo[] directories = file.getDirectories();
+            DirectoryInfo[] directories = fileManager.getDirectories();
             //sorts directories in alphabetic order by name
             Array.Sort(directories, new DirectoryComparer());
-            
+
 
             //display directories
             foreach (DirectoryInfo dir in directories)
@@ -32,12 +39,15 @@ namespace File_Manager.Views
                 Button button = new Button
                 {
                     Text = dir.Name
-                }; 
+                };
                 Display.Children.Add(button);
                 //clicked action
                 button.Clicked += (object sender, System.EventArgs e) =>
                 {
                     Debug.WriteLine(dir.Name + " button clicked!");
+                    fileManager.updateDirectory(dir); //update directory based on button
+                    Display.Children.Clear();
+                    initializeDisplay();
                 };
             }
             //display files
@@ -59,9 +69,6 @@ namespace File_Manager.Views
                     Debug.WriteLine(file.Name + " button clicked!");
                 };
             }
-            
-
-
         }
 
         //code used with buttons and labels to learn file info
