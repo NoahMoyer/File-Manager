@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="File_Manager.Views.AboutPage"
+             xmlns:vm="clr-namespace:File_Manager.ViewModels"
+             Title="{Binding Title}">
+
+  
+  
+  <ContentPage.BindingContext>
+    <vm:AboutViewModel />
+  </ContentPage.BindingContext>
+
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <Color x:Key="Accent">#76b25c</Color>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+
+  
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+      <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+        
+      </StackLayout>
+      
+    </StackLayout>
+
+
+    <StackLayout>
+      <Label x:Name="directoryDisplay" Text="error" FontSize="25"/>
+      <ScrollView HorizontalOptions="FillAndExpand">
+        <StackLayout x:Name ="Display">
+          
+          
+        </StackLayout>
+      </ScrollView>
+    </StackLayout>
+
+
+
+
+
+  </Grid>
+
+</ContentPage>
