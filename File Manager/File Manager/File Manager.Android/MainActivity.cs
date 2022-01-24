@@ -9,8 +9,9 @@ using File_Manager.Scripts;
 using File_Manager.Services;
 using Xamarin.Forms;
 using Xamarin.Essentials;
+using Xamarin.Forms.Platform.Android;
 
-[assembly: Dependency(typeof(File_Manager.Droid.Environment))]
+//[assembly: Dependency(typeof(File_Manager.Droid.Environment))]
 
 namespace File_Manager.Droid
 {
@@ -33,30 +34,52 @@ namespace File_Manager.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-        
+
+        //public override void OnBackPressed()
+        //{
+        //    IBackButtonHandler backButtonHandler = null;
+        //    foreach(var fragment in this.GetFragmentManager().Fragments)
+        //    {
+        //        var mvxPage = fragment.GetType().GetProperty("Page")?.GetValue(fragment) as MvxContentPage;
+        //        backButtonHandler = mvxPage?.ViewModel as IBackButtonHandler;
+
+        //        if(backButtonHandler != null)
+        //        {
+        //            break;
+        //        }
+        //    }
+
+        //    var backButtonHandled = backButtonHandler?.HandleBackButton() ?? false;
+        //    if (!backButtonHandled)
+        //    {
+        //        base.OnBackPressed();
+        //    }
+        //}
     }
-    public class Environment : IEnvironment
-    {
+    //public class Environment : IEnvironment
+    //{
 
         //dyamnically change status bar color based on light or dark mode
-        public void SetStatusBarColor(System.Drawing.Color color, bool darkStatusBarTint)
-        {
-            //don't do it if os is older than lollipop
-            if (Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.Lollipop)
-                return;
+        //public void SetStatusBarColor(System.Drawing.Color color, bool darkStatusBarTint)
+        //{
+        //    //don't do it if os is older than lollipop
+        //    if (Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.Lollipop)
+        //        return;
 
-            var activity = Platform.CurrentActivity;
-            var window = activity.Window;
-            window.AddFlags(Android.Views.WindowManagerFlags.DrawsSystemBarBackgrounds);
-            window.ClearFlags(Android.Views.WindowManagerFlags.TranslucentStatus);
-            window.SetStatusBarColor(color.ToPlatformColor());
+        //    var activity = Platform.CurrentActivity;
+        //    var window = activity.Window;
+        //    window.AddFlags(Android.Views.WindowManagerFlags.DrawsSystemBarBackgrounds);
+        //    window.ClearFlags(Android.Views.WindowManagerFlags.TranslucentStatus);
+        //    window.SetStatusBarColor(color.ToPlatformColor());
 
-            //don't do it if os is older than lollipop
-            if (Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.M)
-            {
-                var flag = (Android.Views.StatusBarVisibility)Android.Views.SystemUiFlags.LightStatusBar;
-                window.DecorView.SystemUiVisibility = darkStatusBarTint ? flag : 0;
-            }
-        }
-    }
+        //    //don't do it if os is older than lollipop
+        //    if (Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.M)
+        //    {
+        //        var flag = (Android.Views.StatusBarVisibility)Android.Views.SystemUiFlags.LightStatusBar;
+        //        window.DecorView.SystemUiVisibility = darkStatusBarTint ? flag : 0;
+        //    }
+        //}
+    //}
+
+
 }

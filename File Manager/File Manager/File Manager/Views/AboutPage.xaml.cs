@@ -7,6 +7,7 @@ using File_Manager.FileManagerScripts;
 using File_Manager.Scripts;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace File_Manager.Views
 {
@@ -24,6 +25,7 @@ namespace File_Manager.Views
 
         public void initializeDisplay()
         {
+            Display.Children.Clear();
             directoryDisplay.Text = fileManager.getCurrentDirectory().FullName; //get current directory
             //get files
             FileInfo[] files = fileManager.getFiles();
@@ -46,7 +48,7 @@ namespace File_Manager.Views
                 {
                     Debug.WriteLine(dir.Name + " button clicked!");
                     fileManager.updateDirectory(dir); //update directory based on button
-                    Display.Children.Clear();
+                    
                     initializeDisplay();
                 };
             }
@@ -69,6 +71,21 @@ namespace File_Manager.Views
                     Debug.WriteLine(file.Name + " button clicked!");
                 };
             }
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            if (!fileManager.getPreviousDirectoryList().Any()) //if list is empty
+            {
+                return base.OnBackButtonPressed();
+            }
+            else
+            {
+                fileManager.goToPreviousDirectory();
+                initializeDisplay();
+                return true;
+            }
+            
         }
 
         //code used with buttons and labels to learn file info

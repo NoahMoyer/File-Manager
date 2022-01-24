@@ -11,8 +11,8 @@ namespace File_Manager.FileManagerScripts
     class FileManager
     {
         //Default directory
-        DirectoryInfo dir = new DirectoryInfo(@"/storage/emulated/0/");
-
+        DirectoryInfo currentDirectory = new DirectoryInfo(@"/storage/emulated/0/");
+        List<DirectoryInfo> previousDirectories = new List<DirectoryInfo>();
 
         //variable for directory name
         //List<String> directories = new List<string>;
@@ -21,22 +21,42 @@ namespace File_Manager.FileManagerScripts
         //gets the files of the current directory
         public FileInfo[] getFiles()
         {
-            return dir.GetFiles();
+            return currentDirectory.GetFiles();
         }
 
         public DirectoryInfo[] getDirectories()
         {
 
-            return dir.GetDirectories();
+            return currentDirectory.GetDirectories();
         }
 
         public DirectoryInfo getCurrentDirectory()
         {
-            return dir;
+            
+            return currentDirectory;
         }
         public void updateDirectory(DirectoryInfo newDir)
         {
-            dir = newDir;
+            previousDirectories.Add(currentDirectory);
+            currentDirectory = newDir;
+        }
+
+        public void goToPreviousDirectory()
+        {
+            currentDirectory = previousDirectories.Last();
+            previousDirectories.Remove(previousDirectories.Last());
+        }
+
+        public List<DirectoryInfo> getPreviousDirectoryList()
+        {
+            return previousDirectories;
+        }
+
+        public void goUpToParentDirectory()
+        {
+            previousDirectories.Add(currentDirectory);
+            currentDirectory = currentDirectory.Parent;
+
         }
     }
 }
