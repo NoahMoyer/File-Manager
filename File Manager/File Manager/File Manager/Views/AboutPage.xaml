@@ -17,6 +17,9 @@
     </ResourceDictionary>
   </ContentPage.Resources>
 
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Name="options" Clicked="optionsClicked"  IconImageSource="Resources/3dots.png"/>
+  </ContentPage.ToolbarItems>
   
   <Grid>
     <Grid.RowDefinitions>

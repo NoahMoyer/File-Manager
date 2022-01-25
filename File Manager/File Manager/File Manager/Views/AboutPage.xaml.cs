@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using File_Manager.FileManagerScripts;
 using File_Manager.Scripts;
+using File_Manager.Resources;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -86,6 +87,11 @@ namespace File_Manager.Views
                 return true;
             }
             
+        }
+
+        public void optionsClicked(object sender, EventArgs e)
+        {
+            Debug.WriteLine("Options button clicked");
         }
 
         //code used with buttons and labels to learn file info
